@@ -8,13 +8,26 @@ public class MoneyManager : MonoBehaviour
     public TextMeshProUGUI userValue;
     public TextMeshProUGUI moneyValue;
 
-    public int user;
-    public int money;
+    [HideInInspector]
+    public int user;        // === 가지고 있는 돈 ===
+    [HideInInspector]
+    public int money;     // === 현금 ===
+
+    private UserData _user;
+
+    public static MoneyManager instance;
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+
         user = 50000;
         money = 100000;
+
+        _user = new UserData("조지현", user, money);
 
         UpdateUi();
     }
