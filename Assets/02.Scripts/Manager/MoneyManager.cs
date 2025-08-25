@@ -14,6 +14,8 @@ public class MoneyManager : MonoBehaviour
 
     // === 처음인지 확인 ===
     public bool isfirst;
+    // === 송금할건지 확인 ===
+    public bool ischeck;
 
     public UserData _user;
 
