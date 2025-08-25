@@ -12,6 +12,9 @@ public class MoneyManager : MonoBehaviour
 
     private string _filePath;
 
+    // === 처음인지 확인 ===
+    public bool isfirst;
+
     public UserData _user;
 
     [Header("image")]
@@ -63,6 +66,8 @@ public class MoneyManager : MonoBehaviour
         {
             _user = new UserData
             (" "," "," ", 50000, 100000);
+
+            isfirst = true;
 
             SaveData(_user);
         }
