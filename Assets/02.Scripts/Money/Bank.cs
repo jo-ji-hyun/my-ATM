@@ -7,8 +7,8 @@ public class Bank : MonoBehaviour
 {
     public GameObject popupError;
 
-    public TextMeshProUGUI inputPlus;
-    public TextMeshProUGUI inputMinus;
+    public TMP_InputField inputPlus;
+    public TMP_InputField inputMinus;
 
     private int _inputValue;
 
@@ -24,13 +24,12 @@ public class Bank : MonoBehaviour
         if(int.TryParse(inputText, out _inputValue))
         {
             OnClickPlus(_inputValue);
-            Debug.Log("변형 성공");
         }
         else
         {
+            inputPlus.text = null;
             Debug.LogError("숫자만 입력해주세요");
         }
-
 
     }
 
@@ -38,9 +37,16 @@ public class Bank : MonoBehaviour
     {
         string inputText = inputMinus.text;
 
-        _inputValue = int.Parse(inputText);
+        if (int.TryParse(inputText, out _inputValue))
+        {
+            OnClickMinus(_inputValue);
+        }
+        else
+        {
+            inputMinus.text = null;
+            Debug.LogError("숫자만 입력해주세요");
+        }
 
-        OnClickMinus(_inputValue);
     }
 
     public void OnClickPlus(int value)

@@ -1611,7 +1611,7 @@ GameObject:
   - component: {fileID: 713821236}
   - component: {fileID: 713821235}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Desposit InputText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3220,8 +3220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupError: {fileID: 33384973}
-  inputPlus: {fileID: 713821235}
-  inputMinus: {fileID: 1826975059}
+  inputPlus: {fileID: 1847594509}
+  inputMinus: {fileID: 1045255847}
 --- !u!1 &1253395062
 GameObject:
   m_ObjectHideFlags: 0
@@ -5468,7 +5468,7 @@ GameObject:
   - component: {fileID: 1889634261}
   - component: {fileID: 1889634260}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Withdraw Input Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5735,7 +5735,6 @@ GameObject:
   - component: {fileID: 1949690451}
   - component: {fileID: 1949690450}
   - component: {fileID: 1949690452}
-  - component: {fileID: 1949690453}
   m_Layer: 5
   m_Name: Deposit
   m_TagString: Untagged
@@ -5832,20 +5831,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949690448}
   m_CullTransparentMesh: 1
---- !u!114 &1949690453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949690448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7f746edcfa12b34393171d5d3497b69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupDeposit: {fileID: 0}
-  popupWithDraw: {fileID: 0}
 --- !u!1 &2031120407
 GameObject:
   m_ObjectHideFlags: 0
