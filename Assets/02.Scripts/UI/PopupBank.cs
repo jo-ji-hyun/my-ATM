@@ -6,6 +6,7 @@ public class PopupBank : MonoBehaviour
 {
     public GameObject popupDeposit;
     public GameObject popupWithDraw;
+    public GameObject popupGive;
 
     // === 입금시 팝업창 ===
     public void OnClickDepositTrue()
@@ -27,5 +28,16 @@ public class PopupBank : MonoBehaviour
     public void OnClickWithDrawFalse()
     {
         popupWithDraw.SetActive(false);
+    }
+
+    // === 송금시 팝업창 ===
+    public void OnClickGiveTrue()
+    {
+        popupGive.SetActive(true);
+    }
+
+    public void OnClickGiveFalse()
+    {
+        popupGive.SetActive(false);
     }
 }
