@@ -2213,8 +2213,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userValue: {fileID: 272980070}
   moneyValue: {fileID: 467401221}
-  user: 0
-  money: 0
   _user:
     name: 
     usermoney: 0
