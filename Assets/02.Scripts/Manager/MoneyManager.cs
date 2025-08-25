@@ -18,6 +18,7 @@ public class MoneyManager : MonoBehaviour
     public bool ischeck;
 
     public UserData _user;
+    public UserList _users;
 
     [Header("image")]
     public Image startImage;
@@ -51,7 +52,7 @@ public class MoneyManager : MonoBehaviour
         userValue.text = string.Format("{0:N0}¿ø", _user.usermoney);
         moneyValue.text = string.Format("{0:N0}¿ø", _user.cashValue);
 
-        SaveData(_user);
+        SaveData(_users);
     }
 
     public void LoadData()
@@ -62,7 +63,12 @@ public class MoneyManager : MonoBehaviour
         {
             var loadData = File.ReadAllText(_filePath);
 
-            _user = JsonUtility.FromJson<UserData>(loadData);
+            _users = JsonUtility.FromJson<UserList>(loadData);
+
+            if (_users == null)
+            {
+                _users = new UserList();
+            }
         }
         else
         {
@@ -71,13 +77,15 @@ public class MoneyManager : MonoBehaviour
 
             isfirst = true;
 
-            SaveData(_user);
+            _users.userList.Add(_user);
+
+            SaveData(_users);
         }
     }
 
-    public void SaveData(UserData userData)
+    public void SaveData(UserList data)
     {
-        var saveData = JsonUtility.ToJson(userData);
+        var saveData = JsonUtility.ToJson(data);
 
         File.WriteAllText(_filePath, saveData);
     }

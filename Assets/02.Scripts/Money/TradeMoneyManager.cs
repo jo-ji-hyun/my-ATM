@@ -15,6 +15,7 @@ public class TradeMoneyManager : MonoBehaviour
     public TextMeshProUGUI popupTxt;
 
     private int _inputValue;
+    private int _keyNumber;                // === 넘겨줄 사람의 신원 ===
 
     public static TradeMoneyManager Instance;
 
@@ -30,10 +31,18 @@ public class TradeMoneyManager : MonoBehaviour
     {
         popup.SetActive(true);
 
-        if(inputID.text == MoneyManager.Instance._user.id) // 나중에 수정
+        if(inputID.text != null) 
         {
-            popupTxt.text = "존재합니다.";
-            MoneyManager.Instance.ischeck = true;
+            for(int i = 0; i < MoneyManager.Instance._users.userList.Count; i++)
+            {
+                if(inputID.text == MoneyManager.Instance._users.userList[i].id)
+                {
+                    popupTxt.text = "존재합니다.";
+                    MoneyManager.Instance.ischeck = true;
+                    _keyNumber = i;
+                    break;
+                }
+            }
         }
         else
         {
@@ -44,6 +53,8 @@ public class TradeMoneyManager : MonoBehaviour
     // === 보낼 금액 확인 ===
     public void OnCheckGiveMoney()
     {
+        if (MoneyManager.Instance.ischeck == false) return;
+
         popupRemittance.SetActive(true);
     }
 
@@ -54,7 +65,13 @@ public class TradeMoneyManager : MonoBehaviour
 
         if (int.TryParse(input, out _inputValue))
         {
-            
+            MoneyManager.Instance._users.userList[_keyNumber].usermoney = _inputValue;
+            MoneyManager.Instance.ischeck = false;
+        }
+        else
+        {
+            Debug.LogError("숫자를 입력해주세요.");
+            inputValue.text = null;
         }
     }
 }

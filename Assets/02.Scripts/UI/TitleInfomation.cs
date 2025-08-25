@@ -16,16 +16,43 @@ public class TitleInfomation : MonoBehaviour
     // === 첫 회원가입 시 ===
     public void OnFirstSignUp()
     {
-        MoneyManager.Instance._user.id = inputID.text;
-        MoneyManager.Instance._user.pw = inputPw.text;
-        MoneyManager.Instance._user.name = inputName.text;
+        if(MoneyManager.Instance.isfirst == true)
+        {
+            MoneyManager.Instance._users.userList[0].id = inputID.text;
+            MoneyManager.Instance._users.userList[0].pw = inputPw.text;
+            MoneyManager.Instance._users.userList[0].name = inputName.text;
 
-        MoneyManager.Instance.isfirst = false;   // === 회원가입 완료 ===
+            MoneyManager.Instance.isfirst = false;   // === 회원가입 완료 ===
 
-        MoneyManager.Instance.SaveData(MoneyManager.Instance._user);
+            MoneyManager.Instance.SaveData(MoneyManager.Instance._users);
 
-        popup.SetActive(true);
-        popupTxt.text = "회원가입 성공";
+            popup.SetActive(true);
+            popupTxt.text = "회원가입 성공";
+        }
+        else
+        {
+            foreach(var list in MoneyManager.Instance._users.userList)
+            {
+                if (list.id != inputID.text)
+                {
+                    MoneyManager.Instance._user.id = inputID.text;
+                    MoneyManager.Instance._user.pw = inputPw.text;
+                    MoneyManager.Instance._user.name = inputName.text;
+
+                    MoneyManager.Instance.SaveData(MoneyManager.Instance._users);
+
+                    popup.SetActive(true);
+                    popupTxt.text = "회원가입 성공";
+                    return;
+                }
+                else
+                {
+                    popup.SetActive(true);
+                    popupTxt.text = "중복된 아이디입니다.";
+                    return;
+                }
+            }
+        }
     }
 
     // === 로그인 버튼을 누를시 ===
