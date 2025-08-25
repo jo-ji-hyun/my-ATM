@@ -13,6 +13,7 @@ public class MoneyManager : MonoBehaviour
     [HideInInspector]
     public int money;     // === Çö±Ý ===
 
+    [SerializeField]
     private UserData _user;
 
     public static MoneyManager instance;
