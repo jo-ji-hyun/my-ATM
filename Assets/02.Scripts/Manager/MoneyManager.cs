@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class MoneyManager : MonoBehaviour
     private string _filePath;
 
     public UserData _user;
+
+    [Header("image")]
+    public Image startImage;
+    public Image nextImage;
 
     public static MoneyManager Instance;
 
@@ -33,13 +38,13 @@ public class MoneyManager : MonoBehaviour
     public void UpdateUi()
     {
         userValue.text = string.Format("{0:N0}원", _user.usermoney);
-        moneyValue.text = string.Format("{0:N0}원", _user.value);
+        moneyValue.text = string.Format("{0:N0}원", _user.cashValue);
     }
 
     public void Refresh()
     {
         userValue.text = string.Format("{0:N0}원", _user.usermoney);
-        moneyValue.text = string.Format("{0:N0}원", _user.value);
+        moneyValue.text = string.Format("{0:N0}원", _user.cashValue);
 
         SaveData(_user);
     }
@@ -57,7 +62,7 @@ public class MoneyManager : MonoBehaviour
         else
         {
             _user = new UserData
-            ("조지현", 50000, 100000);
+            (" "," "," ", 50000, 100000);
 
             SaveData(_user);
         }

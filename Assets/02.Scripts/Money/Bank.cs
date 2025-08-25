@@ -51,14 +51,14 @@ public class Bank : MonoBehaviour
 
     public void OnClickPlus(int value)
     {
-        if(value > MoneyManager.Instance._user.value) // === 돈이 부족할 경우 ===
+        if(value > MoneyManager.Instance._user.cashValue) // === 돈이 부족할 경우 ===
         {
             StartCoroutine(INoMoney());
         }
         else
         {
             MoneyManager.Instance._user.usermoney += value;
-            MoneyManager.Instance._user.value -= value;
+            MoneyManager.Instance._user.cashValue -= value;
 
             MoneyManager.Instance.Refresh();
         }
@@ -73,7 +73,7 @@ public class Bank : MonoBehaviour
         else 
         {
             MoneyManager.Instance._user.usermoney -= value;
-            MoneyManager.Instance._user.value += value;
+            MoneyManager.Instance._user.cashValue += value;
 
             MoneyManager.Instance.Refresh();
         }
