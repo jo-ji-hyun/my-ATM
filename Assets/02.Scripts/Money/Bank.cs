@@ -1,44 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Bank : MonoBehaviour
 {
-    public Image popupError;
+    public GameObject popupError;
+
     private void Awake()
     {
-        if(MoneyManager.Instance != null)
-        {
-            popupError.gameObject.SetActive(false);
-        }
+        popupError.SetActive(false);
     }
 
     public void OnClickPlus(int value)
     {
-        MoneyManager.Instance.user  += value;
-        MoneyManager.Instance.money -= value;
-
-        MoneyManager.Instance.Refresh();
-
-        if(MoneyManager.Instance.money <= 0)
+        if(value > MoneyManager.Instance.money) // === 돈이 부족할 경우 ===
         {
             StartCoroutine(INoMoney());
+        }
+        else
+        {
+            MoneyManager.Instance.user += value;
+            MoneyManager.Instance.money -= value;
+
+            MoneyManager.Instance.Refresh();
         }
     }
 
     public void OnClickMinus(int value)
     {
-        MoneyManager.Instance.user  -= value;
-        MoneyManager.Instance.money += value;
+        if (value > MoneyManager.Instance.user) // === 돈이 부족할 경우 ===
+        {
+            StartCoroutine(INoMoney());
+        }
+        else 
+        {
+            MoneyManager.Instance.user -= value;
+            MoneyManager.Instance.money += value;
+
+            MoneyManager.Instance.Refresh();
+        }
     }
 
     private IEnumerator INoMoney()
     {
-        popupError.gameObject.SetActive(true);
+        popupError.SetActive(true);
 
         yield return new WaitForSeconds(2f);
 
-        popupError.gameObject.SetActive(false);
+        popupError.SetActive(false);
     }
 }
