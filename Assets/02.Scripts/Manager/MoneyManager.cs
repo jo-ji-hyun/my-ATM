@@ -16,13 +16,13 @@ public class MoneyManager : MonoBehaviour
     [SerializeField]
     private UserData _user;
 
-    public static MoneyManager instance;
+    public static MoneyManager Instance;
 
     private void Awake()
     {
-        if(instance == null)
+        if(Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
 
         user = 50000;
@@ -34,6 +34,12 @@ public class MoneyManager : MonoBehaviour
     }
 
     public void UpdateUi()
+    {
+        userValue.text = string.Format("{0:N0}원", user);
+        moneyValue.text = string.Format("{0:N0}원", money);
+    }
+
+    public void Refresh()
     {
         userValue.text = string.Format("{0:N0}원", user);
         moneyValue.text = string.Format("{0:N0}원", money);
