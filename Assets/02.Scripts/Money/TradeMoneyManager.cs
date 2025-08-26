@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class TradeMoneyManager : MonoBehaviour
 {
@@ -26,12 +25,13 @@ public class TradeMoneyManager : MonoBehaviour
             Instance = this;
         }
     }
+
     // === 상대방 신원 조회 ===
     public void OnCheckID()
     {
         popup.SetActive(true);
 
-        if(inputID.text != null) 
+        if(inputID.text != null && inputID.text != MoneyManager.Instance._user.id) 
         {
             for(int i = 0; i < MoneyManager.Instance._users.userList.Count; i++)
             {
@@ -43,6 +43,10 @@ public class TradeMoneyManager : MonoBehaviour
                     break;
                 }
             }
+        }
+        else if(inputID.text == MoneyManager.Instance._user.id)
+        {
+            popupTxt.text = " id를 확인해 주세요.";
         }
         else
         {
@@ -65,8 +69,21 @@ public class TradeMoneyManager : MonoBehaviour
 
         if (int.TryParse(input, out _inputValue))
         {
-            MoneyManager.Instance._users.userList[_keyNumber].usermoney = _inputValue;
+            if (MoneyManager.Instance._user.usermoney < _inputValue)
+            {
+                popup.SetActive(true);
+                popupTxt.text = "금액이 부족합니다.";
+                return;
+            }
+
+            MoneyManager.Instance._user.usermoney -= _inputValue;
+            MoneyManager.Instance._users.userList[_keyNumber].usermoney += _inputValue;
+
+            popupRemittance.SetActive(false);
             MoneyManager.Instance.ischeck = false;
+
+            MoneyManager.Instance.Refresh();
+            MoneyManager.Instance.SaveData(MoneyManager.Instance._users);
         }
         else
         {
