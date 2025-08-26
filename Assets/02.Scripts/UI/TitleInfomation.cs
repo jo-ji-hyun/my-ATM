@@ -35,9 +35,9 @@ public class TitleInfomation : MonoBehaviour
             {
                 if (list.id != inputID.text)
                 {
-                    MoneyManager.Instance._user.id = inputID.text;
-                    MoneyManager.Instance._user.pw = inputPw.text;
-                    MoneyManager.Instance._user.name = inputName.text;
+                    UserData newUserData = new(inputID.text, inputPw.text, inputName.text, 50000, 100000);
+
+                    MoneyManager.Instance._users.userList.Add(newUserData);
 
                     MoneyManager.Instance.SaveData(MoneyManager.Instance._users);
 
@@ -49,7 +49,6 @@ public class TitleInfomation : MonoBehaviour
                 {
                     popup.SetActive(true);
                     popupTxt.text = "중복된 아이디입니다.";
-                    return;
                 }
             }
         }
@@ -58,22 +57,31 @@ public class TitleInfomation : MonoBehaviour
     // === 로그인 버튼을 누를시 ===
     public void OnLogin()
     {
-        if(MoneyManager.Instance.isfirst == true)
+        foreach (var list in MoneyManager.Instance._users.userList)
         {
-            popup.SetActive(true);
-            popupTxt.text = "회원가입을 먼저 해주세요!";
-        }
-        else if(MoneyManager.Instance._user.id == inputID.text && MoneyManager.Instance._user.pw == inputPw.text && MoneyManager.Instance._user.name == inputName.text)
-        {
-            popup.SetActive(true);
-            popupTxt.text = "로그인 성공!";
+            if (MoneyManager.Instance.isfirst == true)
+            {
+                popup.SetActive(true);
+                popupTxt.text = "회원가입을 먼저 해주세요!";
+                return;
+            }
+            else if (list.id == inputID.text && list.pw == inputPw.text && list.name == inputName.text)
+            {
+                popup.SetActive(true);
+                popupTxt.text = "로그인 성공!";
 
-            StartCoroutine(ILogin());
-        }
-        else
-        {
-            popup.SetActive(true);
-            popupTxt.text = "회원 정보가 일치하지 않습니다!";
+                MoneyManager.Instance._user = list;
+
+                MoneyManager.Instance.Refresh();
+
+                StartCoroutine(ILogin());
+                return;
+            }
+            else
+            {
+                popup.SetActive(true);
+                popupTxt.text = "회원 정보가 일치하지 않습니다!";
+            }
         }
     }
 

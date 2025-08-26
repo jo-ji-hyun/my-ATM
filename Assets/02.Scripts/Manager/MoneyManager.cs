@@ -7,14 +7,17 @@ using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
+    public TextMeshProUGUI userName;
     public TextMeshProUGUI userValue;
     public TextMeshProUGUI moneyValue;
 
     private string _filePath;
 
     // === 처음인지 확인 ===
+    [HideInInspector]
     public bool isfirst;
     // === 송금할건지 확인 ===
+    [HideInInspector]
     public bool ischeck;
 
     public UserData _user;
@@ -43,12 +46,14 @@ public class MoneyManager : MonoBehaviour
 
     public void UpdateUi()
     {
+        userName.text = _user.name;
         userValue.text = string.Format("{0:N0}원", _user.usermoney);
         moneyValue.text = string.Format("{0:N0}원", _user.cashValue);
     }
 
     public void Refresh()
     {
+        userName.text = _user.name;
         userValue.text = string.Format("{0:N0}원", _user.usermoney);
         moneyValue.text = string.Format("{0:N0}원", _user.cashValue);
 

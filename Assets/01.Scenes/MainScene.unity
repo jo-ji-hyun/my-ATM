@@ -4677,6 +4677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4747cbfd2b7a50c4096d8a79dc8e4463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userName: {fileID: 328015243}
   userValue: {fileID: 272980070}
   moneyValue: {fileID: 467401221}
   isfirst: 0
